@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite name="Suite1">
+    <parameter name="userName" value="tim"/>
+    <parameter name="realEmail" value="tim@tobias.com"/>
+
+    <groups>
+        <run>
+            <include name="smoke"/>
+        </run>
+    </groups>
+    <test name="test01">
+        <classes>
+            <class name="com.tobias.TestHelloWorld"/>
+        </classes>
+    </test>
+</suite>
