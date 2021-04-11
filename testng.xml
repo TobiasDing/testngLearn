@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<suite name="Suite1">
-    <parameter name="userName" value="tim"/>
-    <parameter name="realEmail" value="tim@tobias.com"/>
+<suite name="Suite1" parallel="tests" thread-count="4">
 
-    <groups>
-        <run>
-            <include name="smoke"/>
-        </run>
-    </groups>
+
     <test name="test01">
+        <parameter name="webdriver" value="webdriver.chrome.driver"/>
+        <parameter name="path" value="/usr/local/bin/chromedriver"/>
         <classes>
-            <class name="com.tobias.TestHelloWorld"/>
+            <class name="com.tobias.TestSelenium"/>
         </classes>
     </test>
+
+    <test name="test02">
+        <parameter name="webdriver" value="webdriver.gecko.driver"/>
+        <parameter name="path" value="/usr/local/bin/geckodriver"/>
+
+        <classes>
+            <class name="com.tobias.TestSelenium"/>
+        </classes>
+
+    </test>
+
+    <test name="test03">
+        <parameter name="webdriver" value="webdriver.chrome.driver"/>
+        <parameter name="path" value="/usr/local/bin/chromedriver"/>
+        <classes>
+            <class name="com.tobias.TestSelenium"/>
+        </classes>
+    </test>
+
+    <test name="test04">
+        <parameter name="webdriver" value="webdriver.gecko.driver"/>
+        <parameter name="path" value="/usr/local/bin/geckodriver"/>
+
+        <classes>
+            <class name="com.tobias.TestSelenium"/>
+        </classes>
+
+    </test>
+
+
 </suite>
