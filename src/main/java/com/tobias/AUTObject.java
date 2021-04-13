@@ -25,12 +25,12 @@ public class AUTObject {
         double result = 1;
 
         if (y < 0) {
-            for (int i = 1; i < -y; i++) {
+            for (int i = 1; i <= -y; i++) {
                 result = result * x;
             }
             result = 1 / result;
         } else {
-            for (int i = 1; i < y; i++) {
+            for (int i = 1; i <= y; i++) {
                 result *= x;
             }
         }
@@ -61,7 +61,7 @@ public class AUTObject {
                 return false;
             }
 
-            if (negative == 1 &&(str.charAt(0) != 45 || str.charAt(1) == '0')) {
+            if (negative == 1 &&(str.charAt(0) != 45 || str.charAt(1) == '0' || str.charAt(1) == '.')) {
                 return false;
             }
 
@@ -70,18 +70,45 @@ public class AUTObject {
     }
 
 
-    @DataProvider(name = "numbers")
+    @DataProvider(name = "checkNumber")
     public Object[][] numbers() {
         return  new Object[][]{
                 {"123", true},
                 {"1.23", true},
                 {"-123", true},
-                {".123", true},
+                {"-123.0", true},
+                {"-0.1230", true},
+                {"0.1230", true},
+                {".123", false},
+                {"0123", false},
+                {"0.1.23", false},
+                {"-.123", false},
+                {".-123", false},
+                {"-1-23", false},
+                {"..123", false},
+                {"&123", false},
+                {"00123", false},
         };
     }
-    @Test(dataProvider = "numbers")
+
+    @Test(dataProvider = "checkNumber")
     public void testCheckNumber(String str, boolean expect) {
         boolean actual = aut.checkNumber(str);
         Assert.assertEquals(actual, expect, String.format("Checking numbers error! input: %s", str));
     }
+
+
+    @DataProvider(name = "power")
+    public Object[][] numbersForPower() {
+        return new Object[][] {
+                {2.0, 2, 4.0},
+                {2.0, -2, 0.25},
+        };
+    }
+    @Test(dataProvider = "power")
+    public void testPower(double x, int y, double expect) {
+        double actual = aut.power(x, y);
+        Assert.assertEquals(actual, expect);
+    }
+
 }
